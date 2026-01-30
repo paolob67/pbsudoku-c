@@ -98,6 +98,8 @@ A native macOS graphical interface is now available! See [GUI_README.md](GUI_REA
 
 ### Features
 - 🖱️ Interactive grid with click-to-edit cells
+- ✏️ **Manual puzzle creation** - no input file needed!
+- 🔒 Lock clues to mark starting positions
 - 🔢 Support for both 9×9 and 16×16 puzzles
 - 📁 Load and save puzzle files
 - ⚡ Optional reduction optimization
@@ -105,11 +107,19 @@ A native macOS graphical interface is now available! See [GUI_README.md](GUI_REA
 - 🎨 Color-coded cells (blue for clues, black for solutions)
 
 ### Quick GUI Usage
+
+**Create a puzzle manually:**
 1. Launch: `./sudoku_gui`
 2. Select grid size (9×9 or 16×16)
-3. Enter numbers or load a puzzle file
-4. Click "Solve" to see the solution
-5. Save results if needed
+3. Click cells and enter starting numbers
+4. Click "Lock Clues" to mark them as original (turns blue)
+5. Click "Solve" to see the solution
+6. Click "Save" to save your puzzle
+
+**Or load an existing puzzle:**
+1. Launch: `./sudoku_gui`
+2. Click "Load" and select a puzzle file
+3. Click "Solve" to see the solution
 
 For complete GUI documentation, see [GUI_README.md](GUI_README.md).
 

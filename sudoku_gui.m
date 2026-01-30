@@ -26,6 +26,10 @@
 
 @implementation SudokuGridView
 
+- (BOOL)acceptsFirstResponder {
+    return YES;
+}
+
 - (instancetype)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -57,7 +61,7 @@
     
     for (int row = 0; row < size; row++) {
         for (int col = 0; col < size; col++) {
-            NSRect cellRect = NSMakeRect(col * cellSize + 2, 
+            NSRect cellRect = NSMakeRect(col * cellSize + 2,
                                         (size - row - 1) * cellSize + 2,
                                         cellSize - 4, cellSize - 4);
             
@@ -67,13 +71,13 @@
             [textField setBezeled:YES];
             [textField setBezelStyle:NSTextFieldSquareBezel];
             [textField setTag:(row * MAX_SIZE + col)];
+            [textField setEditable:YES];
+            [textField setSelectable:YES];
+            [textField setEnabled:YES];
             
-            // Set formatter to accept only valid numbers
-            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-            [formatter setMinimum:@0];
-            [formatter setMaximum:@(size)];
-            [formatter setAllowsFloats:NO];
-            [textField setFormatter:formatter];
+            // Allow only single digit/number input - no formatter to avoid blocking input
+            [[textField cell] setScrollable:YES];
+            [[textField cell] setWraps:NO];
             
             [self addSubview:textField];
             [textFields addObject:textField];
@@ -113,16 +117,17 @@
                     [field setTextColor:[NSColor blueColor]];
                     [field setEditable:NO];
                 } else {
-                    // Computed values: normal font and black color
+                    // Computed/user-entered values: normal font and black color
                     [field setFont:[NSFont systemFontOfSize:(size == 9 ? 20 : 14)]];
                     [field setTextColor:[NSColor blackColor]];
-                    [field setEditable:NO];
+                    [field setEditable:YES];  // Keep editable unless it's an original clue
                 }
             } else {
                 [field setStringValue:@""];
                 [field setFont:[NSFont systemFontOfSize:(size == 9 ? 20 : 14)]];
                 [field setTextColor:[NSColor blackColor]];
                 [field setEditable:YES];
+                [field setSelectable:YES];
             }
         }
     }
@@ -210,6 +215,7 @@
     NSButton *clearButton;
     NSButton *loadButton;
     NSButton *saveButton;
+    NSButton *setOriginalButton;
     NSButton *size9Button;
     NSButton *size16Button;
     NSButton *reductionCheckbox;
@@ -266,6 +272,15 @@
     [clearButton setAction:@selector(clearPuzzle:)];
     [contentView addSubview:clearButton];
     buttonX += buttonWidth + spacing;
+    
+    // Set Original button
+    setOriginalButton = [[NSButton alloc] initWithFrame:NSMakeRect(buttonX, buttonY, buttonWidth + 20, buttonHeight)];
+    [setOriginalButton setTitle:@"Lock Clues"];
+    [setOriginalButton setBezelStyle:NSBezelStyleRounded];
+    [setOriginalButton setTarget:self];
+    [setOriginalButton setAction:@selector(setAsOriginal:)];
+    [contentView addSubview:setOriginalButton];
+    buttonX += buttonWidth + 30;
     
     // Load button
     loadButton = [[NSButton alloc] initWithFrame:NSMakeRect(buttonX, buttonY, buttonWidth, buttonHeight)];
@@ -331,6 +346,7 @@
     [contentView addSubview:statusLabel];
     
     [window makeKeyAndOrderFront:nil];
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (void)solvePuzzle:(id)sender {
@@ -423,6 +439,13 @@
     }];
 }
 
+- (void)setAsOriginal:(id)sender {
+    int puzzleData[MAX_SIZE][MAX_SIZE];
+    [gridView getPuzzle:puzzleData];
+    [gridView setPuzzle:puzzleData size:currentSize isOriginal:YES];
+    [statusLabel setStringValue:@"Clues locked! Now you can solve or save this puzzle."];
+}
+
 - (void)setSize9:(id)sender {
     currentSize = 9;
     N = 3;
@@ -454,8 +477,12 @@
 int main(int argc, const char *argv[]) {
     @autoreleasepool {
         NSApplication *app = [NSApplication sharedApplication];
+        [app setActivationPolicy:NSApplicationActivationPolicyRegular];
+        
         AppDelegate *delegate = [[AppDelegate alloc] init];
         [app setDelegate:delegate];
+        
+        [app activateIgnoringOtherApps:YES];
         [app run];
     }
     return 0;

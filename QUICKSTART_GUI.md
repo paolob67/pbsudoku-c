@@ -23,13 +23,14 @@
 3. **Solve it**: Click the "Solve" button
 4. **See the result**: The solution appears instantly with timing info
 
-### Manual Entry
+### Manual Entry (Create Your Own Puzzle!)
 
 1. **Select grid size**: Click "9×9" (default) or "16×16"
 2. **Click a cell**: Click any empty cell in the grid
-3. **Type a number**: Enter 1-9 (or 1-16 for 16×16 puzzles)
-4. **Fill the puzzle**: Continue entering known values
-5. **Solve**: Click "Solve" when ready
+3. **Type numbers**: Enter 1-9 (or 1-16 for 16×16 puzzles) for starting clues
+4. **Lock clues**: Click "Lock Clues" to mark them as original (turns blue)
+5. **Solve**: Click "Solve" to find the solution
+6. **Save**: Optionally save your puzzle for later
 
 ### Using Reduction
 
@@ -40,14 +41,16 @@
 
 ## Tips
 
-- **Blue numbers** = Original clues (can't edit)
-- **Black numbers** = Your entries or solutions (editable)
+- **Blue numbers** = Original clues (locked, can't edit)
+- **Black numbers** = Your entries or solutions (editable until locked)
 - **Tab key** = Move between cells
 - **Delete/Backspace** = Clear a cell
+- **Lock Clues button** = Marks your entries as the starting puzzle
 - **Load test files** = Use puzzles from `tests/` directory
 
-## Example Workflow
+## Example Workflows
 
+### Workflow 1: Load and Solve
 ```bash
 # 1. Build
 make gui
@@ -61,13 +64,27 @@ make gui
 #    - Click "Open"
 #    - Click "Solve"
 #    - Watch it solve in milliseconds!
+```
 
-# 4. Try with reduction:
-#    - Click "Clear"
-#    - Click "Load" again
+### Workflow 2: Create Your Own Puzzle
+```bash
+# 1. Launch
+./sudoku_gui
+
+# 2. In the GUI:
+#    - Enter some numbers (e.g., 5, 3, 7 in first row)
+#    - Click "Lock Clues" (numbers turn blue)
+#    - Click "Solve" (solution appears in black)
+#    - Click "Save" to save your puzzle
+```
+
+### Workflow 3: Try Reduction Optimization
+```bash
+# In the GUI:
+#    - Load a puzzle
 #    - Check "Use Reduction"
 #    - Click "Solve"
-#    - Compare the timing
+#    - Compare the timing with/without reduction
 ```
 
 ## Troubleshooting

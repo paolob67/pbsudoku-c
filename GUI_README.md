@@ -36,22 +36,42 @@ Or double-click the `sudoku_gui` file in Finder.
 
 ## Usage
 
-### Manual Entry
+### Manual Entry (New!)
+You can now create puzzles directly in the GUI without needing an input file!
+
 1. **Select Grid Size**: Click "9×9" or "16×16" button
-2. **Enter Numbers**: Click on cells and type numbers (0 for empty)
-3. **Solve**: Click the "Solve" button
-4. **Clear**: Click "Clear" to reset the grid
+2. **Enter Numbers**: Click on cells and type the starting clues (leave empty cells blank)
+3. **Lock Clues**: Click "Lock Clues" to mark your entries as the original puzzle
+   - Locked clues turn **blue** and become read-only
+   - This prevents accidentally changing them while solving
+4. **Solve**: Click "Solve" to find the solution
+5. **Save**: Optionally save your puzzle for later use
+
+**Workflow Example:**
+```
+1. Start with empty grid
+2. Enter known numbers (e.g., 5, 3, 7 in first row)
+3. Click "Lock Clues" → numbers turn blue
+4. Click "Solve" → solution appears in black
+5. Click "Save" → save puzzle to file
+```
 
 ### Loading Puzzles
 1. Click the "Load" button
 2. Select a puzzle file (same format as command-line version)
-3. The puzzle will appear in the grid
+3. The puzzle will appear in the grid with original clues in blue
 
 ### Saving Puzzles
+You can save puzzles at any stage:
+- **Before solving**: Save your manually entered puzzle
+- **After solving**: Save the complete solution
+- **Partial entry**: Save work in progress
+
+Steps:
 1. Enter or solve a puzzle
 2. Click the "Save" button
 3. Choose a location and filename
-4. The current grid state will be saved
+4. The current grid state will be saved in standard format
 
 ### Options
 - **Use Reduction**: Check this box to enable constraint propagation before solving
@@ -61,40 +81,49 @@ Or double-click the `sudoku_gui` file in Finder.
 ## Interface Layout
 
 ```
-┌─────────────────────────────────────────────────────┐
-│              Sudoku Solver                          │
-├─────────────────────────────────────────────────────┤
-│                                                     │
-│   ┌───────────────────────────────────────────┐   │
-│   │                                           │   │
-│   │                                           │   │
-│   │           Sudoku Grid (9×9/16×16)        │   │
-│   │                                           │   │
-│   │                                           │   │
-│   └───────────────────────────────────────────┘   │
-│                                                     │
-│   Grid Size: [9×9] [16×16]  [✓] Use Reduction     │
-│                                                     │
-│   [Solve] [Clear] [Load] [Save]                    │
-│                                                     │
-│   Status: Ready. Enter puzzle or load from file.   │
-└─────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│                   Sudoku Solver                          │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│   ┌────────────────────────────────────────────────┐   │
+│   │                                                │   │
+│   │                                                │   │
+│   │         Sudoku Grid (9×9/16×16)               │   │
+│   │                                                │   │
+│   │                                                │   │
+│   └────────────────────────────────────────────────┘   │
+│                                                          │
+│   Grid Size: [9×9] [16×16]  [✓] Use Reduction          │
+│                                                          │
+│   [Solve] [Clear] [Lock Clues] [Load] [Save]           │
+│                                                          │
+│   Status: Ready. Enter puzzle or load from file.        │
+└──────────────────────────────────────────────────────────┘
 ```
 
 ## Grid Interaction
 
 ### Cell Colors
-- **Blue Text**: Original puzzle clues (read-only)
-- **Black Text**: User-entered values or solutions (editable)
+- **Blue Text**: Original puzzle clues (locked, read-only)
+  - Set by loading a file OR clicking "Lock Clues" after manual entry
+- **Black Text**: User-entered values or solutions (editable until locked)
 
 ### Keyboard Input
-- Type numbers directly into cells
+- Type numbers directly into cells (1-9 for 9×9, 1-16 for 16×16)
 - Use Tab to move between cells
 - Delete/Backspace to clear a cell
+- Press 0 or delete to make a cell empty
 
 ### Grid Lines
 - **Thick Lines**: Sub-grid boundaries (3×3 or 4×4)
 - **Thin Lines**: Individual cell boundaries
+
+### Button Functions
+- **Solve**: Solves the current puzzle
+- **Clear**: Resets the entire grid to empty
+- **Lock Clues**: Marks current entries as original clues (turns them blue)
+- **Load**: Opens a puzzle file
+- **Save**: Saves current grid state to a file
 
 ## File Format
 
