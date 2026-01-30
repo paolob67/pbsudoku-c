@@ -12,7 +12,7 @@ A high-performance Sudoku solver written in C that supports both standard 9×9 a
 
 ## 📥 Download
 
-**[Download Latest Release](https://github.com/yourusername/pbsudoku-c/releases/latest)** - Get the ready-to-use macOS app!
+**[Download Latest Release](https://github.com/©/pbsudoku-c/releases/latest)** - Get the ready-to-use macOS app!
 
 ## Table of Contents
 - [Features](#features)
@@ -575,7 +575,7 @@ This project is provided under the MIT License. See [LICENSE](LICENSE) for detai
 Created as a demonstration of backtracking algorithms and constraint satisfaction problems in C.
 
 **Maintainer:** Paolo
-**Repository:** https://github.com/yourusername/pbsudoku-c
+**Repository:** https://github.com/paolob67/pbsudoku-c
 
 ## Acknowledgments
 
