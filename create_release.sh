@@ -35,11 +35,37 @@ cd "${RELEASE_DIR}"
 zip -r "${RELEASE_NAME}.zip" SudokuSolver.app
 cd ..
 
+# Copy fix script to release
+cp fix_quarantine.sh "${RELEASE_DIR}/"
+chmod +x "${RELEASE_DIR}/fix_quarantine.sh"
+
 # Create release notes
 cat > "${RELEASE_DIR}/RELEASE_NOTES.md" << 'EOF'
 # Sudoku Solver v1.0.0
 
 A high-performance Sudoku solver with native macOS GUI.
+
+## ⚠️ Important: First-Time Setup
+
+Since this app is not code-signed, macOS may show a warning. To open:
+
+### Method 1: Right-Click Open (Recommended)
+1. Download and extract the app
+2. **Right-click** (or Control-click) on SudokuSolver.app
+3. Select **"Open"** from the menu
+4. Click **"Open"** in the dialog that appears
+5. The app will now open and be trusted
+
+### Method 2: Remove Quarantine (Advanced)
+If you get "app is damaged" error:
+```bash
+xattr -cr /path/to/SudokuSolver.app
+```
+
+Or use the included script:
+```bash
+./fix_quarantine.sh SudokuSolver.app
+```
 
 ## Features
 
@@ -75,7 +101,19 @@ A high-performance Sudoku solver with native macOS GUI.
 1. Download `SudokuSolver-v1.0.0.zip`
 2. Extract the ZIP file
 3. Move SudokuSolver.app to Applications folder
-4. Right-click and select "Open" (first time only, due to Gatekeeper)
+4. **Right-click** and select **"Open"** (first time only)
+
+### Troubleshooting
+
+**"App is damaged" or "can't be opened" error?**
+- Use the included `fix_quarantine.sh` script
+- Or run: `xattr -cr SudokuSolver.app`
+- Then right-click → Open
+
+**Still not working?**
+- Make sure you're on macOS 10.13 or later
+- Try moving the app to Applications folder first
+- Check that you have permission to run apps from unidentified developers (System Preferences → Security & Privacy)
 
 ## Usage
 
