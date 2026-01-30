@@ -43,6 +43,11 @@ make
 make gui
 ```
 
+### Build macOS App Bundle (with custom icon)
+```bash
+make app
+```
+
 ### Run Command-Line
 ```bash
 # Solve a 9×9 puzzle
@@ -57,7 +62,11 @@ make gui
 
 ### Run GUI Application
 ```bash
+# Run executable directly
 ./sudoku_gui
+
+# Or launch as macOS app (with custom icon)
+open SudokuSolver.app
 ```
 
 ### Test

@@ -2,6 +2,10 @@
 sudoku_solver
 sudoku_gui
 
+# macOS App Bundle
+SudokuSolver.app/
+*.app/
+
 # Object files
 *.o
 *.obj
