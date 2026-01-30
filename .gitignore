@@ -6,6 +6,11 @@ sudoku_gui
 SudokuSolver.app/
 *.app/
 
+# Release artifacts
+release/
+*.dmg
+*.zip
+
 # Object files
 *.o
 *.obj

@@ -4,10 +4,15 @@
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey.svg)](https://github.com/yourusername/pbsudoku-c)
 [![Language](https://img.shields.io/badge/language-C-orange.svg)](https://en.wikipedia.org/wiki/C_(programming_language))
 [![GUI](https://img.shields.io/badge/GUI-Cocoa%2FAppKit-blue.svg)](https://developer.apple.com/documentation/appkit)
+[![Release](https://img.shields.io/badge/release-v1.0.0-green.svg)](https://github.com/yourusername/pbsudoku-c/releases)
 
 A high-performance Sudoku solver written in C that supports both standard 9×9 and larger 16×16 puzzles using backtracking with optional constraint propagation optimization.
 
 **Now with native macOS GUI!** 🎉
+
+## 📥 Download
+
+**[Download Latest Release](https://github.com/yourusername/pbsudoku-c/releases/latest)** - Get the ready-to-use macOS app!
 
 ## Table of Contents
 - [Features](#features)
