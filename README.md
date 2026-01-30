@@ -74,6 +74,28 @@ make clean
 
 A native macOS graphical interface is now available! See [GUI_README.md](GUI_README.md) for detailed documentation.
 
+### Screenshots
+
+<div align="center">
+
+#### Main Window
+![Main Window](screenshots/gui-main-window.png)
+*Empty 9×9 grid ready for input*
+
+#### Puzzle Loaded
+![Puzzle Loaded](screenshots/gui-puzzle-loaded.png)
+*Puzzle loaded from file with original clues in blue*
+
+#### Puzzle Solved
+![Puzzle Solved](screenshots/gui-puzzle-solved.png)
+*Solved puzzle with solutions in black*
+
+#### 16×16 Puzzle Support
+![16x16 Puzzle](screenshots/gui-16x16-example.png)
+*Large puzzle support with the same intuitive interface*
+
+</div>
+
 ### Features
 - 🖱️ Interactive grid with click-to-edit cells
 - 🔢 Support for both 9×9 and 16×16 puzzles
