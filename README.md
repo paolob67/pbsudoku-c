@@ -18,12 +18,14 @@ A high-performance Sudoku solver written in C that supports both standard 9×9 a
 - [Features](#features)
 - [Quick Start](#quick-start)
 - [GUI Application](#gui-application)
+- [For Developers](#for-developers)
 - [Algorithm Overview](#algorithm-overview)
 - [Architecture](#architecture)
 - [Usage](#usage)
 - [Input Format](#input-format)
 - [Testing](#testing)
 - [Performance](#performance)
+- [Additional Documentation](#additional-documentation)
 
 ## Features
 
@@ -83,6 +85,44 @@ make test
 ```bash
 make clean
 ```
+
+## For Developers
+
+### Creating App Icons
+The project includes a custom Sudoku grid icon. To regenerate or customize:
+
+```bash
+cd resources
+./create_icon.sh
+```
+
+See [resources/README.md](resources/README.md) for icon customization details.
+
+### Creating Release Packages
+To create distributable DMG and ZIP files:
+
+```bash
+./create_release.sh
+```
+
+This creates:
+- `release/SudokuSolver-v1.0.0.dmg` - Professional installer with Applications folder shortcut
+- `release/SudokuSolver-v1.0.0.zip` - Alternative download format
+- `release/fix_quarantine.sh` - Gatekeeper workaround for users
+- `release/RELEASE_NOTES.md` - Release documentation
+
+See [RELEASE_GUIDE.md](RELEASE_GUIDE.md) for complete release instructions.
+
+### Code Signing (Optional)
+To eliminate Gatekeeper warnings, you can code-sign the app with an Apple Developer account ($99/year).
+
+See [CODE_SIGNING_GUIDE.md](CODE_SIGNING_GUIDE.md) for:
+- Apple Developer account setup
+- Code signing process
+- Notarization steps
+- Cost-benefit analysis
+
+**Note:** Code signing is optional. The current approach with clear user instructions is perfectly valid for open-source distribution.
 
 ## GUI Application
 
@@ -467,6 +507,56 @@ Total per iteration: O(N³)
 Iterations: Typically 1-5 for solvable puzzles
 ```
 
+## Additional Documentation
+
+This project includes comprehensive guides for various aspects:
+
+### 📖 User Guides
+- **[GUI_README.md](GUI_README.md)** - Complete GUI documentation with features and usage
+- **[QUICKSTART_GUI.md](QUICKSTART_GUI.md)** - Quick start guide for the GUI application
+
+### 🛠️ Developer Guides
+- **[RELEASE_GUIDE.md](RELEASE_GUIDE.md)** - How to create and publish releases on GitHub
+- **[CODE_SIGNING_GUIDE.md](CODE_SIGNING_GUIDE.md)** - Code signing and notarization for macOS
+- **[resources/README.md](resources/README.md)** - Icon customization and resources
+
+### 📦 Project Structure
+
+```
+pbsudoku_c_bob/
+├── README.md                    # This file - main documentation
+├── LICENSE                      # MIT License
+├── Makefile                     # Build system
+│
+├── sudoku_solver.c             # Command-line solver implementation
+├── sudoku_solver.h             # Header file
+├── sudoku_lib.c                # Library version (for GUI)
+├── sudoku_gui.m                # macOS GUI (Objective-C)
+│
+├── create_app_bundle.sh        # Creates macOS .app bundle
+├── create_release.sh           # Creates distributable packages
+├── fix_quarantine.sh           # Gatekeeper workaround script
+│
+├── resources/                  # App resources
+│   ├── AppIcon.icns           # Custom app icon
+│   ├── create_icon.sh         # Icon generation script
+│   └── README.md              # Icon documentation
+│
+├── screenshots/                # GUI screenshots
+│   └── README.md              # Screenshot instructions
+│
+├── tests/                      # Test suite
+│   ├── run_tests.sh           # Test runner
+│   ├── test*.in               # Test inputs
+│   └── test*.expected         # Expected outputs
+│
+└── Documentation/
+    ├── GUI_README.md          # GUI user guide
+    ├── QUICKSTART_GUI.md      # Quick start guide
+    ├── RELEASE_GUIDE.md       # Release instructions
+    └── CODE_SIGNING_GUIDE.md  # Code signing guide
+```
+
 ## Contributing
 
 When contributing, please:
@@ -474,11 +564,21 @@ When contributing, please:
 2. Add tests for new features
 3. Update this README if adding new functionality
 4. Ensure `make test` passes
+5. Update relevant documentation guides
 
 ## License
 
-This project is provided as-is for educational purposes.
+This project is provided under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## Author
 
 Created as a demonstration of backtracking algorithms and constraint satisfaction problems in C.
+
+**Maintainer:** Paolo
+**Repository:** https://github.com/yourusername/pbsudoku-c
+
+## Acknowledgments
+
+- Built with native macOS Cocoa/AppKit framework
+- Uses backtracking algorithm with constraint propagation
+- Inspired by classic Sudoku solving techniques
