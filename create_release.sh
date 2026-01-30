@@ -24,10 +24,27 @@ mkdir -p "${RELEASE_DIR}"
 echo "Packaging app bundle..."
 cp -R SudokuSolver.app "${RELEASE_DIR}/"
 
-# Create a DMG (optional, requires hdiutil)
+# Create a DMG with Applications folder symlink
 echo "Creating DMG image..."
 DMG_NAME="${RELEASE_NAME}.dmg"
-hdiutil create -volname "Sudoku Solver" -srcfolder "${RELEASE_DIR}/SudokuSolver.app" -ov -format UDZO "${RELEASE_DIR}/${DMG_NAME}"
+DMG_TEMP_DIR="${RELEASE_DIR}/dmg_temp"
+
+# Create temporary directory for DMG contents
+mkdir -p "${DMG_TEMP_DIR}"
+
+# Copy app to temp directory
+cp -R "${RELEASE_DIR}/SudokuSolver.app" "${DMG_TEMP_DIR}/"
+
+# Create symlink to Applications folder
+ln -s /Applications "${DMG_TEMP_DIR}/Applications"
+
+# Create the DMG
+hdiutil create -volname "Sudoku Solver" -srcfolder "${DMG_TEMP_DIR}" -ov -format UDZO "${RELEASE_DIR}/${DMG_NAME}"
+
+# Clean up temp directory
+rm -rf "${DMG_TEMP_DIR}"
+
+echo "✅ DMG created with Applications folder shortcut"
 
 # Create a ZIP archive (alternative to DMG)
 echo "Creating ZIP archive..."
